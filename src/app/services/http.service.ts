@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { Employees } from '../data-model/emp.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class HttpService {
 
 
   // Create
-  create(data: any): Observable<any> {
+  createEmployee(data: any): Observable<any> {
     let API_URL = `${this.apiUrl}`;
     return this.http.post(API_URL, data)
       .pipe(
@@ -24,12 +25,12 @@ export class HttpService {
   }
 
   // Read
-  list() {
-    return this.http.get(`${this.apiUrl}`);
+  getAllEmployees() {
+    return this.http.get<Employees[]>(`${this.apiUrl}`);
   }
 
   // Update
-  update(id: any, data: any): Observable<any> {
+  updateEmployee(id: any, data: any): Observable<any> {
     let API_URL = `${this.apiUrl}/${id}`;
     return this.http.put(API_URL, data, { headers: this.headers }).pipe(
       catchError(this.handleError)
@@ -37,7 +38,7 @@ export class HttpService {
   }
 
   // Delete
-  delete(id: any): Observable<any> {
+  deleteEmployee(id: any): Observable<any> {
     var API_URL = `${this.apiUrl}/${id}`;
     return this.http.delete(API_URL).pipe(
       catchError(this.handleError)
