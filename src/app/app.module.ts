@@ -24,6 +24,8 @@ import { ModalComponent } from './modal/modal.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store/store-index';
+import { employeeReducer } from './store/emp.reducers';
+import { EmployeeEffects } from './store/emp.effects';
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import { reducers, metaReducers } from './store/store-index';
     FormsModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    StoreModule.forFeature('employees', employeeReducer ),
+    EffectsModule.forFeature([EmployeeEffects]),
     EffectsModule.forRoot([]),
     StoreModule.forRoot(reducers, {
       metaReducers

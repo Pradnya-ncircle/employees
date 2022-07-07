@@ -4,12 +4,17 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { concatMap, map, tap } from "rxjs";
 import { HttpService } from "../services/http.service";
 import { employeeActionTypes } from "./emp.actions";
+import { selectAll } from "./emp.reducers";
 
 
 @Injectable()
 export class EmployeeEffects {
 
-    constructor(private empService: HttpService, private actions$: Actions, private router: Router) {}
+    constructor(private empService: HttpService, private actions$: Actions, private router: Router) {
+
+
+
+    }
 
     loadEmployees$ = createEffect(() =>
     this.actions$.pipe(

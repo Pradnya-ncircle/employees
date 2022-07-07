@@ -5,6 +5,12 @@ import { HttpService } from '../services/http.service';
 import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalComponent } from '../modal/modal.component';
+import { AppState } from '../store/store-index';
+import { Store } from '@ngrx/store';
+import { Employees } from '../data-model/emp.model';
+import { Observable } from 'rxjs';
+import { getAllEmployees } from '../store/emp.selectors';
+import { loadEmployees } from '../store/emp.actions';
 
 
 @Component({
@@ -19,10 +25,17 @@ export class EmployeeComponent implements OnInit {
   form!: FormGroup;
   addFormValue = [{}];
 
+
+  employees$!: Observable<Employees[]>;
+
+  employeeToBeUpdated!: Employees;
+
+  isUpdateActivated = false;
+
   constructor(private httpService : HttpService,
     private dialog: MatDialog,
     private fb: FormBuilder,
-   
+    private store : Store<AppState>
 
     ) {
     }
@@ -32,8 +45,9 @@ export class EmployeeComponent implements OnInit {
       this.empDetails = res;
       console.log(this.empDetails)
     })
+    this.store.dispatch(loadEmployees());
    
-  
+    this.employees$ = this.store.select(getAllEmployees);
 
   }
 

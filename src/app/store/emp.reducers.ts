@@ -13,7 +13,7 @@ export interface EmpState extends EntityState<Employees> {
     employeesLoaded: false
   });
   
-  export const courseReducer = createReducer(
+  export const employeeReducer = createReducer(
     initialState,
     
     on(employeeActionTypes.EmployeesLoaded, (state, action)=>{
