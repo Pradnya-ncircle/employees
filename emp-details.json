@@ -1,0 +1,60 @@
+{
+  "employees" : [
+  {
+      "empId" : 1,
+      "firstName" : "John",
+      "lastName" : "Doe",
+      "dateOfJoining" : "13/02/2012",
+      "dateOfBirth" : "02/07/1990",
+      "designation" : "Software Engineer",
+      "extraInfo" : "",
+      "experience" : 10
+
+  },
+  {
+      "empId" : 2,
+      "firstName" : "Ross",
+      "lastName" : "Geller",
+      "dateOfJoining" : "05/01/2016",
+      "dateOfBirth" : "06/08/1995",
+      "designation" : "Dinosour",
+      "extraInfo" : "He is 'Real' a doctor",
+      "experience" : 6
+
+  },
+  {
+      "empId" : 3,
+      "firstName" : "Monica",
+      "lastName" : "Geller",
+      "dateOfJoining" : "02/12/2011",
+      "dateOfBirth" : "05/08/1991",
+      "designation" : "Head Chef",
+      "extraInfo" : "",
+      "experience" : 8
+
+  },
+  {
+      "empId" : 4,
+      "firstName" : "Joey",
+      "lastName" : "Tribbiony",
+      "dateOfJoining" : "03/05/2010",
+      "dateOfBirth" : "03/07/1992",
+      "designation" : "Actor",
+      "extraInfo" : "",
+      "experience" : 7
+
+  },
+  {
+      "empId" : 5,
+      "firstName" : "Pheobe",
+      "lastName" : "Buffey",
+      "dateOfJoining" : "03/03/2012",
+      "dateOfBirth" : "03/07/1994",
+      "designation" : "Singer",
+      "extraInfo" : "",
+      "experience" : 5
+  } 
+
+]
+
+}

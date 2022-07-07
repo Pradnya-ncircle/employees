@@ -1,0 +1,46 @@
+<h1 mat-dialog-title align = "center">Add Employee</h1>
+<form action="" [formGroup]="form" (ngSubmit)="onSubmit(form)">
+<div mat-dialog-content>
+
+    <mat-form-field appearance="fill">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+       &nbsp;
+      <mat-form-field appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter birth date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dob">
+    
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter joining date</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="doj">
+     
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Designation</mat-label>
+        <input matInput formControlName="designation">
+      </mat-form-field>
+      <br>
+      <mat-form-field hintLabel="Max 160 characters" appearance="fill">
+        <input matInput #input maxlength="160" placeholder="Extra Info" formControlName="extras">
+        <mat-hint align="end">{{input.value?.length || 0}}/300</mat-hint>
+        </mat-form-field>
+
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="onNoClick()">Cancel</button>
+  <button mat-button  type="submit" cdkFocusInitial [disabled]="form.invalid">Submit</button>
+</div>
+
+</form>
