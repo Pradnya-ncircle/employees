@@ -4,26 +4,26 @@ import {Update} from '@ngrx/entity';
 
 
 export const loadEmployees = createAction(
-  '[Emp List] Load Courses via Service',
+  '[Emp List] Load Employees via Service',
 );
 
 export const EmployeesLoaded = createAction(
-  '[Emp Effect] Courses Loaded Successfully',
+  '[Emp Effect] Employees Loaded Successfully',
   props<{employees: Employees[]}>()
 );
 
 export const createEmployee = createAction(
-  '[Emp Course Component] Create Course',
+  '[Emp Course Component] Create Employee',
   props<{employee: Employees}>()
 );
 
 export const deleteEmployee = createAction(
-  '[Emp List Operations] Delete Course',
-  props<{empId: string}>()
+  '[Emp List Operations] Delete Employee',
+  props<{id: number}>()
 );
 
 export const updateEmployee = createAction(
-  '[Emp List Operations] Update Course',
+  '[Emp List Operations] Update Employee',
   props<{update: Update<Employees>}>()
 );
 

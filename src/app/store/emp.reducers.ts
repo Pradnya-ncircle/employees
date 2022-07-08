@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { createReducer, on } from "@ngrx/store";
 import { Employees } from "../data-model/emp.model";
-import { employeeActionTypes, EmployeesLoaded } from './emp.actions';
+import { employeeActionTypes } from './emp.actions';
 
 export interface EmpState extends EntityState<Employees> {
     employeesLoaded: boolean;
@@ -17,7 +17,7 @@ export interface EmpState extends EntityState<Employees> {
     initialState,
     
     on(employeeActionTypes.EmployeesLoaded, (state, action)=>{
-        return adapter.addMany(
+        return adapter.setAll(
             action.employees,
             {...state, employeesLoaded : true}
         );
@@ -28,7 +28,7 @@ export interface EmpState extends EntityState<Employees> {
     }),
 
     on(employeeActionTypes.deleteEmployee, (state, action) => {
-        return adapter.removeOne(action.empId, state);
+        return adapter.removeOne(action.id, state);
       }),
 
     on(employeeActionTypes.updateEmployee, (state, action) => {

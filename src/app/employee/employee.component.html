@@ -208,8 +208,8 @@
   <br>
   <div class="content" role="main">
     <div class="card-container">
-         <table  class="table">
-            <thead>
+         <table class="table table-striped">
+            <thead class="table-primary">
                 <tr>
                   <th scope="col">Emp Id</th>
                   <th scope="col">First Name</th>
@@ -222,13 +222,13 @@
               </thead>
               <tbody>
                 <tr *ngFor="let emp of employees$ | async">    
-                    <td><div>{{emp.empId}}</div></td>
+                    <td><div>{{emp.id}}</div></td>
                     <td> <div> {{emp.firstName}} </div> </td>
                     <td> <div> {{emp.lastName}} </div> </td>
                     <td> <div> {{emp.designation}} </div> </td>
                     <td> <div> {{emp.dateOfBirth}} </div> </td>
                     <td> <div> {{emp.dateOfJoining}} </div> </td>
-
+                    <td> <div> {{emp.experience}} </div> </td>
                 </tr>
 
               </tbody>

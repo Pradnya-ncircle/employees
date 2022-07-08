@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { concatMap, map, tap } from "rxjs";
+import * as moment from "moment";
+import { concatMap, map, switchMap, tap } from "rxjs";
 import { HttpService } from "../services/http.service";
 import { employeeActionTypes } from "./emp.actions";
 import { selectAll } from "./emp.reducers";
@@ -10,18 +11,21 @@ import { selectAll } from "./emp.reducers";
 @Injectable()
 export class EmployeeEffects {
 
-    constructor(private empService: HttpService, private actions$: Actions, private router: Router) {
-
-
-
-    }
+    constructor(private empService: HttpService, private actions$: Actions, private router: Router) { }
 
     loadEmployees$ = createEffect(() =>
     this.actions$.pipe(
       ofType(employeeActionTypes.loadEmployees),
-      concatMap(() => this.empService.getAllEmployees()),
+      switchMap(() => this.empService.getAllEmployees().pipe(map((emp: any)=>{
+        return emp.map((item : any)=>{
+            const momentDate = new Date(item.dateOfJoining)
+            item.experience =  moment().diff(momentDate, 'years');
+            return item
+        })
+      }))),
       map(employees => employeeActionTypes.EmployeesLoaded({employees}))
-    )
+    ),
+    
   );
 
   createEmployee$ = createEffect(() =>
@@ -36,7 +40,7 @@ export class EmployeeEffects {
 deleteCourse$ = createEffect(() =>
 this.actions$.pipe(
   ofType(employeeActionTypes.deleteEmployee),
-  concatMap((action) => this.empService.deleteEmployee(action.empId))
+  concatMap((action) => this.empService.deleteEmployee(action.id))
 ),
 {dispatch: false}
 );

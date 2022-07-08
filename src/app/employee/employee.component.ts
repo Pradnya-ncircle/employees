@@ -8,9 +8,10 @@ import { ModalComponent } from '../modal/modal.component';
 import { AppState } from '../store/store-index';
 import { Store } from '@ngrx/store';
 import { Employees } from '../data-model/emp.model';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { getAllEmployees } from '../store/emp.selectors';
 import { loadEmployees } from '../store/emp.actions';
+import * as moment from 'moment';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class EmployeeComponent implements OnInit {
   closeResult!: string;
   form!: FormGroup;
   addFormValue = [{}];
+  experience :number | undefined;
 
 
   employees$!: Observable<Employees[]>;
@@ -41,13 +43,14 @@ export class EmployeeComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.httpService.getAllEmployees().subscribe(res=>{
-      this.empDetails = res;
-      console.log(this.empDetails)
-    })
+
+    // this.httpService.getAllEmployees().subscribe(res=>{
+    //   this.empDetails = res;
+    //   console.log(this.empDetails)
+    // })
     this.store.dispatch(loadEmployees());
    
-    this.employees$ = this.store.select(getAllEmployees);
+    this.employees$ = this.store.select(getAllEmployees)
 
   }
 
