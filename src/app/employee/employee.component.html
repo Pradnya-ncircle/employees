@@ -217,7 +217,9 @@
                   <th scope="col">Designation</th>
                   <th scope="col">Birth Date</th>
                   <th scope="col">Joining Date</th>
-                  <th scope="col">Experience</th>
+                  <th scope="col">Experience (Yrs)</th>
+                  <th scope="col">Operations</th>
+              
                 </tr>
               </thead>
               <tbody>
@@ -228,12 +230,16 @@
                     <td> <div> {{emp.designation}} </div> </td>
                     <td> <div> {{emp.dateOfBirth}} </div> </td>
                     <td> <div> {{emp.dateOfJoining}} </div> </td>
-                    <td> <div> {{emp.experience}} </div> </td>
+                    <td> <div> {{emp.experience}}</div> </td>
+                    <td>
+                      <button  (click)="updateEmp(emp)" class="btn btn-outline-secondary" style="margin: 5px">Update</button>
+                      <button (click)="deleteEmp(emp.id)" class="btn btn-outline-danger" style="margin: 5px">Delete</button>
+                    </td>
                 </tr>
 
               </tbody>
         </table> 
-      <button class="card card-small" (click)="openDialog('add',{})">
+      <button class="card card-small" (click)="openDialog('Add',{})">
         <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
         <span>Add Employee</span>
       </button>

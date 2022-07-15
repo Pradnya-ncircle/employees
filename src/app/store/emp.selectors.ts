@@ -12,7 +12,7 @@ export const getAllEmployees = createSelector(
 
 export const areEmployeesLoaded = createSelector(
     empFeatureSelector,
-  state => state.employeesLoaded
+    state => state.employeesLoaded
 );
 
 

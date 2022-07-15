@@ -1,5 +1,5 @@
-<h1 mat-dialog-title align = "center">Add Employee</h1>
-<form action="" [formGroup]="form" (ngSubmit)="onSubmit(form)">
+<h1 mat-dialog-title align = "center">{{action}} Employee</h1>
+<form action="" [formGroup]="form">
 <div mat-dialog-content>
 
     <mat-form-field appearance="fill">
@@ -14,14 +14,14 @@
       <br>
       <mat-form-field appearance="fill">
         <mat-label>Enter birth date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="dob">
+        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
     
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Enter joining date</mat-label>
-        <input matInput [matDatepicker]="picker1" formControlName="doj">
+        <input matInput [matDatepicker]="picker1" formControlName="dateOfJoining">
      
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
@@ -39,8 +39,8 @@
 
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button color="primary" (click)="onNoClick()">Cancel</button>
-  <button mat-button  type="submit" cdkFocusInitial [disabled]="form.invalid">Submit</button>
+  <button mat-button color="primary" (click)="onNoClick('Cancel')">Cancel</button>
+  <button mat-button  cdkFocusInitial [disabled]="form.invalid" (click)="onSubmit(form)">Submit</button>
 </div>
 
 </form>

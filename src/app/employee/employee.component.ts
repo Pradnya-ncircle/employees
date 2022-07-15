@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { Employees } from '../data-model/emp.model';
 import { map, Observable } from 'rxjs';
 import { getAllEmployees } from '../store/emp.selectors';
-import { loadEmployees } from '../store/emp.actions';
+import { employeeActionTypes, loadEmployees } from '../store/emp.actions';
 import * as moment from 'moment';
 
 
@@ -43,29 +43,26 @@ export class EmployeeComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
-    // this.httpService.getAllEmployees().subscribe(res=>{
-    //   this.empDetails = res;
-    //   console.log(this.empDetails)
-    // })
     this.store.dispatch(loadEmployees());
    
     this.employees$ = this.store.select(getAllEmployees)
+   
 
   }
 
-  openDialog(action:any, obj:any) {
-       obj.action = action
+openDialog(action:any, obj:any) {
      const dialogRef = this.dialog.open(ModalComponent, {
       width: '500px',
       height : '580px',
-      data: obj
+      data: {
+        action,
+        obj
+      }
     });
 
     dialogRef.afterClosed().subscribe(
       (result) => {
-        console.log(result)
-        if(result.event == 'add'){
+        if(result.event == 'Add'){
           console.log(result.data)
           this.addFormValue = result.form
         }
@@ -73,8 +70,11 @@ export class EmployeeComponent implements OnInit {
   );  
 }
 
+updateEmp(emp:any){
+  this.openDialog('Update', emp)
+}
 
-  addEmp(){
-    
-  }
+deleteEmp(id: number) {
+  this.store.dispatch(employeeActionTypes.deleteEmployee({id}));
+}
 }

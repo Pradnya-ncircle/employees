@@ -11,46 +11,46 @@ import { selectAll } from "./emp.reducers";
 @Injectable()
 export class EmployeeEffects {
 
-    constructor(private empService: HttpService, private actions$: Actions, private router: Router) { }
+    constructor(private empService: HttpService, private actions$: Actions) { }
 
-    loadEmployees$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(employeeActionTypes.loadEmployees),
-      switchMap(() => this.empService.getAllEmployees().pipe(map((emp: any)=>{
-        return emp.map((item : any)=>{
-            const momentDate = new Date(item.dateOfJoining)
-            item.experience =  moment().diff(momentDate, 'years');
-            return item
-        })
-      }))),
-      map(employees => employeeActionTypes.EmployeesLoaded({employees}))
-    ),
-    
-  );
+        loadEmployees$ = createEffect(() =>
+            this.actions$.pipe(
+            ofType(employeeActionTypes.loadEmployees),
+            switchMap(() => this.empService.getAllEmployees().pipe(map((emp: any)=>{
+                return emp.map((item : any)=>{
+                    const momentDate = new Date(item.dateOfJoining)
+                    item.experience =  moment().diff(momentDate, 'years');
+                    console.log(item)
+                    return item
+                })
+            }))),
+            map(employees => employeeActionTypes.EmployeesLoaded({employees}))
+            ),
+        );
 
-  createEmployee$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(employeeActionTypes.createEmployee),
-    concatMap((action) => this.empService.createEmployee(action.employee)),
-    // tap(() => this.router.navigateByUrl('/courses'))
-  ),
-  {dispatch: false}
-);   
+        createEmployee$ = createEffect(() =>
+            this.actions$.pipe(
+                ofType(employeeActionTypes.createEmployee),
+                concatMap((action) => this.empService.createEmployee(action.employee)),
+                // tap(() => this.router.navigateByUrl('/courses'))
+            ),
+            {dispatch: false}
+        );   
 
-deleteCourse$ = createEffect(() =>
-this.actions$.pipe(
-  ofType(employeeActionTypes.deleteEmployee),
-  concatMap((action) => this.empService.deleteEmployee(action.id))
-),
-{dispatch: false}
-);
+        deleteCourse$ = createEffect(() =>
+            this.actions$.pipe(
+            ofType(employeeActionTypes.deleteEmployee),
+            concatMap((action) => this.empService.deleteEmployee(action.id))
+            ),
+            {dispatch: false}
+        );
 
-updateEmployee$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(employeeActionTypes.updateEmployee),
-      concatMap((action) => this.empService.updateEmployee(action.update.id, action.update.changes))
-    ),
-    {dispatch: false}
-  );
+        updateEmployee$ = createEffect(() =>
+            this.actions$.pipe(
+            ofType(employeeActionTypes.updateEmployee),
+            concatMap((action) => this.empService.updateEmployee(action.update.id, action.update.changes))
+            ),
+            {dispatch: false}
+        );
 
 }
