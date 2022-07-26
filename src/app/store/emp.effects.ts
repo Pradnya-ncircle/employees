@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
@@ -11,16 +12,18 @@ import { selectAll } from "./emp.reducers";
 @Injectable()
 export class EmployeeEffects {
 
-    constructor(private empService: HttpService, private actions$: Actions) { }
+    constructor(private empService: HttpService, private actions$: Actions, private datePipe : DatePipe) { }
 
         loadEmployees$ = createEffect(() =>
             this.actions$.pipe(
             ofType(employeeActionTypes.loadEmployees),
             switchMap(() => this.empService.getAllEmployees().pipe(map((emp: any)=>{
                 return emp.map((item : any)=>{
-                    const momentDate = new Date(item.dateOfJoining)
+                    let date : any = this.datePipe.transform(item.dateOfJoining, 'MM/dd/yyyy')
+                    console.log(date)
+                    const momentDate = new Date(date)
                     item.experience =  moment().diff(momentDate, 'years');
-                    console.log(item)
+                    console.log(moment().diff(momentDate, 'years'))
                     return item
                 })
             }))),
@@ -32,7 +35,6 @@ export class EmployeeEffects {
             this.actions$.pipe(
                 ofType(employeeActionTypes.createEmployee),
                 concatMap((action) => this.empService.createEmployee(action.employee)),
-                // tap(() => this.router.navigateByUrl('/courses'))
             ),
             {dispatch: false}
         );   

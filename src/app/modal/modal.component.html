@@ -1,46 +1,73 @@
+
 <h1 mat-dialog-title align = "center">{{action}} Employee</h1>
-<form action="" [formGroup]="form">
-<div mat-dialog-content>
 
-    <mat-form-field appearance="fill">
-        <mat-label>First name</mat-label>
-        <input matInput formControlName="firstName">
-      </mat-form-field>
-       &nbsp;
-      <mat-form-field appearance="fill">
-        <mat-label>Last name</mat-label>
-        <input matInput formControlName="lastName">
-      </mat-form-field>
-      <br>
-      <mat-form-field appearance="fill">
-        <mat-label>Enter birth date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
-    
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Enter joining date</mat-label>
-        <input matInput [matDatepicker]="picker1" formControlName="dateOfJoining">
-     
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
-      <br>
-      <mat-form-field appearance="fill">
-        <mat-label>Designation</mat-label>
-        <input matInput formControlName="designation">
-      </mat-form-field>
-      <br>
-      <mat-form-field hintLabel="Max 160 characters" appearance="fill">
-        <input matInput #input maxlength="160" placeholder="Extra Info" formControlName="extras">
-        <mat-hint align="end">{{input.value?.length || 0}}/300</mat-hint>
+<div  align="center">
+  <form action="" [formGroup]="form">
+    <table>
+      <tr>
+        <td> 
+          <mat-form-field appearance="fill">
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstName">
+          <mat-error *ngIf="form.controls['firstName'].errors?.['required']">First name is required</mat-error>
         </mat-form-field>
-
-</div>
-<div mat-dialog-actions align="end">
-  <button mat-button color="primary" (click)="onNoClick('Cancel')">Cancel</button>
-  <button mat-button  cdkFocusInitial [disabled]="form.invalid" (click)="onSubmit(form)">Submit</button>
-</div>
-
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastName">
+            <mat-error *ngIf="form.controls['lastName'].errors?.['required']">Last name is required</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <mat-form-field appearance="fill" style="width:100%">
+            <mat-label>Enter birth date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.controls['dateOfBirth'].errors?.['required']">Date of birth is required</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <mat-form-field appearance="fill"  style="width:100%">
+            <mat-label>Enter joining date</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="dateOfJoining">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            <mat-error *ngIf="form.controls['dateOfJoining'].errors?.['required']">Date of joining is required</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Designation</mat-label>
+            <input matInput formControlName="designation">
+            <mat-error *ngIf="form.controls['designation'].errors?.['required']">Designation is required</mat-error>
+          </mat-form-field>
+        </td>
+        <td colspan="2">
+          <mat-form-field hintLabel="Max 160 characters" appearance="fill">
+            <input matInput #input maxlength="160" placeholder="Extra Info" formControlName="extraInfo">
+            <mat-hint align="end">{{input.value?.length || 0}}/160</mat-hint>
+            <mat-error *ngIf="form.controls['extraInfo'].errors?.['required']">Extra info is required</mat-error>
+            </mat-form-field>
+        </td>
+      </tr>
+      <br>
+      <tr>
+        <td colspan="2">
+          <div mat-dialog-actions align="end">
+            <button mat-stroked-button  (click)="onNoClick('Cancel')">Cancel</button>
+            <button mat-stroked-button color="primary"   cdkFocusInitial [disabled]="form.invalid" (click)="onSubmit(form)">Submit</button>
+          </div>
+        </td>
+      </tr>
+    </table>
 </form>
+</div>
+

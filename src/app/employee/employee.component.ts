@@ -26,6 +26,7 @@ export class EmployeeComponent implements OnInit {
   form!: FormGroup;
   addFormValue = [{}];
   experience :number | undefined;
+  isEmpty : boolean | undefined;
 
 
   employees$!: Observable<Employees[]>;
@@ -46,14 +47,17 @@ export class EmployeeComponent implements OnInit {
     this.store.dispatch(loadEmployees());
    
     this.employees$ = this.store.select(getAllEmployees)
-   
+
+    this.employees$.subscribe((res:any)=>{
+        this.isEmpty = res.length > 0 ? false : true
+    })
 
   }
 
 openDialog(action:any, obj:any) {
      const dialogRef = this.dialog.open(ModalComponent, {
       width: '500px',
-      height : '580px',
+      height : '540px',
       data: {
         action,
         obj
@@ -62,8 +66,13 @@ openDialog(action:any, obj:any) {
 
     dialogRef.afterClosed().subscribe(
       (result) => {
+        console.log(result)
         if(result.event == 'Add'){
           console.log(result.data)
+          this.addFormValue = result.form
+        }
+        else if(result.event == 'Update'){
+       
           this.addFormValue = result.form
         }
       }

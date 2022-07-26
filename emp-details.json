@@ -2,73 +2,53 @@
   "employees": [
     {
       "id": 1,
-      "firstName": "Sheldon",
-      "lastName": "Cooper",
-      "dateOfJoining": "05/01/2016",
-      "dateOfBirth": "06/08/1995",
-      "designation": "Scientist",
-      "extraInfo": "He is not a 'Real' doctor",
-      "experience": null
+      "firstName": "John ",
+      "lastName": "Doe",
+      "designation": "Software Developer",
+      "dateOfJoining": "2014-11-13T18:30:00.000Z",
+      "dateOfBirth": "1991-01-14T18:30:00.000Z",
+      "extraInfo": "Extra info",
+      "experience": 6
     },
     {
       "id": 2,
-      "firstName": "John",
-      "lastName": "Doe",
-      "dateOfJoining": "02/12/2011",
-      "dateOfBirth": "05/08/1991",
-      "designation": "Software Engineer",
-      "extraInfo": "",
-      "experience": null
+      "firstName": "Arya",
+      "lastName": "Stark",
+      "designation": "Analyst",
+      "dateOfJoining": "2015-07-08T18:30:00.000Z",
+      "dateOfBirth": "1993-10-31T18:30:00.000Z",
+      "extraInfo": "Extra info",
+      "experience": 6
     },
     {
       "id": 3,
-      "firstName": "Chandler",
-      "lastName": "Something",
-      "dateOfJoining": "03/05/2010",
-      "dateOfBirth": "03/07/1992",
-      "designation": "Trasnponder",
-      "extraInfo": "",
+      "firstName": "Sheldon",
+      "lastName": "Cooper",
+      "designation": "Manager",
+      "dateOfJoining": "2009-06-01T18:30:00.000Z",
+      "dateOfBirth": "1992-09-01T18:30:00.000Z",
+      "extraInfo": "Extra Info",
       "experience": null
     },
     {
       "id": 4,
-      "firstName": "Monica",
-      "lastName": "Geller",
-      "dateOfJoining": "05/01/2016",
-      "dateOfBirth": "06/08/1995",
-      "designation": "Head Chef",
-      "extraInfo": "",
+      "firstName": "Chandler",
+      "lastName": "Bing",
+      "designation": "Software Tester",
+      "dateOfJoining": "2016-03-15T18:30:00.000Z",
+      "dateOfBirth": "1992-06-14T18:30:00.000Z",
+      "extraInfo": "Extra info",
       "experience": null
     },
     {
       "id": 5,
       "firstName": "Rachel",
       "lastName": "Green",
-      "dateOfJoining": "05/01/2016",
-      "dateOfBirth": "06/08/1995",
-      "designation": "Fashion Designer",
-      "extraInfo": "",
-      "experience": null
-    },
-    {
-      "id": 6,
-      "firstName": "Arya",
-      "lastName": "Stark",
-      "dateOfJoining": "05/01/2016",
-      "dateOfBirth": "06/08/1995",
-      "designation": "CTO",
-      "extraInfo": "",
-      "experience": null
-    },
-    {
-      "id": 7,
-      "firstName": "sad",
-      "lastName": "sadd",
-      "designation": "asdasd",
-      "dateOfBirth": "02/01/2016",
-      "dateOfJoining": "07/12/2022",
-      "extras": "sdfsd",
-      "experience": null
+      "designation": "Designer",
+      "dateOfJoining": "2005-10-09T18:30:00.000Z",
+      "dateOfBirth": "2022-10-20T18:30:00.000Z",
+      "extraInfo": "Extra info",
+      "experience": 5
     }
   ]
 }

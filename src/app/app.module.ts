@@ -16,7 +16,7 @@ import {MatDialogModule, MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS } from '@angul
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { ModalComponent } from './modal/modal.component';
@@ -26,6 +26,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store/store-index';
 import { employeeReducer } from './store/emp.reducers';
 import { EmployeeEffects } from './store/emp.effects';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -56,20 +57,19 @@ import { EmployeeEffects } from './store/emp.effects';
     FormsModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    StoreModule.forFeature('employees', employeeReducer ),
+    StoreModule.forFeature('employees', employeeReducer),
     EffectsModule.forFeature([EmployeeEffects]),
     EffectsModule.forRoot([]),
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
     StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      // logOnly: environment.production, // Restrict extension to log-only mode
-      // autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+      maxAge: 25,
     }),
 
   ],
-  providers: [ModalComponent],
+  providers: [ModalComponent, DatePipe,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

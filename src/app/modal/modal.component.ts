@@ -9,6 +9,7 @@ import { employeeActionTypes } from '../store/emp.actions';
 import { AppState } from '../store/store-index';
 import * as uuid from 'uuid';
 import { getAllEmployees } from '../store/emp.selectors';
+import { Update } from '@ngrx/entity';
 
 @Component({
   selector: 'app-modal',
@@ -21,16 +22,18 @@ export class ModalComponent implements OnInit {
   localdata:any
   formDataFromParent : any;
   action:string;
-  existingIds!: number;
+  lastId!: number;
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private store : Store<AppState>
     
   ) { 
-    console.log(data)
+   
     this.localdata = {...data}
     this.action = this.localdata.action
+      
+    console.log(data)
   }
 
   ngOnInit(): void {
@@ -39,14 +42,15 @@ export class ModalComponent implements OnInit {
         firstName : new FormControl(null, Validators.required),
         lastName : new FormControl(null, Validators.required),
         designation : new FormControl(null, Validators.required),
-        dateOfBirth : new FormControl(null, Validators.required),
         dateOfJoining : new FormControl(null, Validators.required),
-        extras : new FormControl(null, Validators.required),
+        dateOfBirth : new FormControl(null, Validators.required),
+        extraInfo : new FormControl(null, Validators.required),
         experience : new FormControl(null)
     });
 
+    this.action === 'Update' ? this.form.setValue(this.data.obj) : ''
     this.store.select(getAllEmployees).subscribe((res:any)=>{
-        this.existingIds = res.length
+        this.lastId = res.length - 1 !== -1 ? res[res.length - 1]?.id : 0;
      })
   }
 
@@ -63,15 +67,19 @@ export class ModalComponent implements OnInit {
   onSubmit(form: FormGroup){
     
       if(this.action === 'Add'){
-      form.value.dateOfBirth =  moment(form.value.dateOfBirth).utc().format('MM/DD/YYYY')
-      form.value.dateOfJoining =  moment(form.value.dateOfJoining).utc().format('MM/DD/YYYY')
-      form.value.id = this.existingIds + 1
+        form.value.id = this.lastId + 1
         const employee : Employees = form.value
         console.log(employee)
         this.store.dispatch(employeeActionTypes.createEmployee({employee}))
       }
       else{
-
+        const update : Update<Employees> = {
+          id : form.value.id,
+          changes : {
+            ...form.value
+          }
+        }
+        this.store.dispatch(employeeActionTypes.updateEmployee({update}))
       }
 
       this.dialogRef.close({
